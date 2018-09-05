@@ -12,7 +12,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
 ENV KUBE_VERSION="v1.11.2"
-ENV HELM_VERSION="v2.10.0"
+ENV HELM_VERSION="v2.9.1"
 # Helm releases: https://github.com/kubernetes/helm/releases
 
 RUN apk add --update ca-certificates \
