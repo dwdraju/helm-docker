@@ -4,7 +4,7 @@
 
 ##### Local
 ```
-docker run --rm -v ~/.kube/config:/root/.kube/config dwdraju/kubectl-docker helm ls
+docker run --rm -v ~/.kube/config:/root/.kube/config dwdraju/helm-docker helm ls
 ```
 
 ##### Gitlab CI/CD
