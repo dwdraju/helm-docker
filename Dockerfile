@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.12
 
 LABEL maintainer="Raju Dawadi <rajudawadinp@gmail.com>"
 
@@ -11,18 +11,20 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
-ENV KUBE_VERSION="v1.11.2"
-ENV HELM_VERSION="v2.10.0"
+ENV KUBE_VERSION="v1.18.6"
+ENV HELM_VERSION="v3.2.4"
 # Helm releases: https://github.com/kubernetes/helm/releases
 
 RUN apk add --update ca-certificates \
- && apk add --update -t deps curl \
+ && apk add --update -t deps curl bash \
+ && apk -U add findutils \
  && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
  && chmod +x /usr/local/bin/kubectl \
- && wget -q http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
+ && wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
  && chmod +x /usr/local/bin/helm \
  && apk del --purge deps \
  && rm /var/cache/apk/* \
- && mkdir /root/.kube
+ && mkdir -p /app/.kube
 
-WORKDIR /root
+WORKDIR /app
+ENTRYPOINT ["/bin/sh", "-l", "-c"]
