@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.12
 
 LABEL maintainer="Raju Dawadi <rajudawadinp@gmail.com>"
 
@@ -11,8 +11,8 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
-ENV KUBE_VERSION="v1.11.2"
-ENV HELM_VERSION="v2.10.0"
+ENV KUBE_VERSION="v1.18.6"
+ENV HELM_VERSION="v3.2.4"
 # Helm releases: https://github.com/kubernetes/helm/releases
 
 RUN apk add --update ca-certificates \
